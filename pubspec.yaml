@@ -48,6 +48,7 @@ dependencies:
   google_sign_in: ^6.2.1
   url_launcher: ^6.3.0
   ar_flutter_plugin_flutterflow: ^0.7.47
+  vector_math: ^2.1.4
 
 dev_dependencies:
   flutter_test:

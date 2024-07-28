@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../common/widgets/my_app_bar.dart';
+import '../widgets/test_ar.dart';
 
 class ARIdentifyPage extends StatelessWidget {
   static String routeName = '/ar-identify';
@@ -9,14 +10,13 @@ class ARIdentifyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: MyAppBar(
+    return Scaffold(
+      appBar: const MyAppBar(
         leading: true,
         backgroundColor: Colors.transparent,
       ),
-      body: Center(
-        child: Text('Welcome to the AR Identify Page'),
-      ),
+      extendBodyBehindAppBar: true,
+      body: ObjectsOnPlanesWidget(),
     );
   }
 }
