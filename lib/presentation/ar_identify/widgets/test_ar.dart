@@ -39,7 +39,7 @@ class _ObjectsOnPlanesWidgetState extends State<ObjectsOnPlanesWidget> {
       body: Stack(
         children: [
           ARView(
-            onARViewCreated: onARViewCreated,
+            onARViewCreated: _onARViewCreated,
             planeDetectionConfig: PlaneDetectionConfig.horizontalAndVertical,
           ),
           Align(
@@ -48,7 +48,7 @@ class _ObjectsOnPlanesWidgetState extends State<ObjectsOnPlanesWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: onRemoveEverything,
+                  onPressed: _onRemoveEverything,
                   child: const Text("Remove Everything")
                 ),
               ]
@@ -59,7 +59,7 @@ class _ObjectsOnPlanesWidgetState extends State<ObjectsOnPlanesWidget> {
     );
   }
 
-  void onARViewCreated(
+  void _onARViewCreated(
     ARSessionManager arSessionManager,
     ARObjectManager arObjectManager,
     ARAnchorManager arAnchorManager,
@@ -77,11 +77,11 @@ class _ObjectsOnPlanesWidgetState extends State<ObjectsOnPlanesWidget> {
     );
     this.arObjectManager!.onInitialize();
 
-    this.arSessionManager!.onPlaneOrPointTap = onPlaneOrPointTapped;
-    this.arObjectManager!.onNodeTap = onNodeTapped;
+    this.arSessionManager!.onPlaneOrPointTap = _onPlaneOrPointTapped;
+    this.arObjectManager!.onNodeTap = _onNodeTapped;
   }
 
-  Future<void> onRemoveEverything() async {
+  Future<void> _onRemoveEverything() async {
     /*nodes.forEach((node) {
       this.arObjectManager.removeNode(node);
     });*/
@@ -91,12 +91,12 @@ class _ObjectsOnPlanesWidgetState extends State<ObjectsOnPlanesWidget> {
     anchors = [];
   }
 
-  Future<void> onNodeTapped(List<String> nodes) async {
+  Future<void> _onNodeTapped(List<String> nodes) async {
     var number = nodes.length;
     arSessionManager!.onError!("Tapped $number node(s)");
   }
 
-  Future<void> onPlaneOrPointTapped(List<ARHitTestResult> hitTestResults) async {
+  Future<void> _onPlaneOrPointTapped(List<ARHitTestResult> hitTestResults) async {
     var singleHitTestResult = hitTestResults.firstWhere(
       (hitTestResult) => hitTestResult.type == ARHitTestResultType.plane
     );
