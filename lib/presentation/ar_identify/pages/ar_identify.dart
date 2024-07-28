@@ -10,13 +10,13 @@ class ARIdentifyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const MyAppBar(
+    return const Scaffold(
+      appBar: MyAppBar(
         leading: true,
         backgroundColor: Colors.transparent,
       ),
       extendBodyBehindAppBar: true,
-      body: ObjectsOnPlanesWidget(),
+      body: MyARWidget(),
     );
   }
 }

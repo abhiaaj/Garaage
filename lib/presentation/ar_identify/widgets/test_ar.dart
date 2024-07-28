@@ -12,14 +12,14 @@ import 'package:ar_flutter_plugin_flutterflow/datatypes/hittest_result_types.dar
 import 'package:ar_flutter_plugin_flutterflow/models/ar_node.dart';
 import 'package:ar_flutter_plugin_flutterflow/models/ar_hittest_result.dart';
 
-class ObjectsOnPlanesWidget extends StatefulWidget {
-  const ObjectsOnPlanesWidget({super.key});
+class MyARWidget extends StatefulWidget {
+  const MyARWidget({super.key});
 
   @override
-  State<ObjectsOnPlanesWidget> createState() => _ObjectsOnPlanesWidgetState();
+  State<MyARWidget> createState() => _MyARWidgetState();
 }
 
-class _ObjectsOnPlanesWidgetState extends State<ObjectsOnPlanesWidget> {
+class _MyARWidgetState extends State<MyARWidget> {
   ARSessionManager? arSessionManager;
   ARObjectManager? arObjectManager;
   ARAnchorManager? arAnchorManager;
@@ -35,36 +35,33 @@ class _ObjectsOnPlanesWidgetState extends State<ObjectsOnPlanesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          ARView(
-            onARViewCreated: _onARViewCreated,
-            planeDetectionConfig: PlaneDetectionConfig.horizontalAndVertical,
+    return Stack(
+      children: [
+        ARView(
+          onARViewCreated: _onARViewCreated,
+          planeDetectionConfig: PlaneDetectionConfig.horizontalAndVertical,
+        ),
+        Align(
+          alignment: FractionalOffset.bottomCenter,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: _onRemoveEverything,
+                child: const Text("Remove Everything")
+              ),
+            ]
           ),
-          Align(
-            alignment: FractionalOffset.bottomCenter,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: _onRemoveEverything,
-                  child: const Text("Remove Everything")
-                ),
-              ]
-            ),
-          )
-        ]
-      )
+        )
+      ]
     );
   }
 
   void _onARViewCreated(
-    ARSessionManager arSessionManager,
-    ARObjectManager arObjectManager,
-    ARAnchorManager arAnchorManager,
-    ARLocationManager arLocationManager
-  ) {
+      ARSessionManager arSessionManager,
+      ARObjectManager arObjectManager,
+      ARAnchorManager arAnchorManager,
+      ARLocationManager arLocationManager) {
     this.arSessionManager = arSessionManager;
     this.arObjectManager = arObjectManager;
     this.arAnchorManager = arAnchorManager;
@@ -72,7 +69,6 @@ class _ObjectsOnPlanesWidgetState extends State<ObjectsOnPlanesWidget> {
     this.arSessionManager!.onInitialize(
       showFeaturePoints: false,
       showPlanes: true,
-      customPlaneTexturePath: "Images/triangle.png",
       showWorldOrigin: true,
     );
     this.arObjectManager!.onInitialize();
@@ -82,9 +78,9 @@ class _ObjectsOnPlanesWidgetState extends State<ObjectsOnPlanesWidget> {
   }
 
   Future<void> _onRemoveEverything() async {
-    /*nodes.forEach((node) {
-      this.arObjectManager.removeNode(node);
-    });*/
+    /*for (var node in nodes) {
+      arObjectManager!.removeNode(node);
+    }*/
     for (var anchor in anchors) {
       arAnchorManager!.removeAnchor(anchor);
     }
@@ -106,6 +102,7 @@ class _ObjectsOnPlanesWidgetState extends State<ObjectsOnPlanesWidget> {
 
     if (didAddAnchor!) {
       anchors.add(newAnchor);
+
       // Add note to anchor
       var newNode = ARNode(
         type: NodeType.webGLB,
@@ -114,6 +111,7 @@ class _ObjectsOnPlanesWidgetState extends State<ObjectsOnPlanesWidget> {
         position: Vector3(0.0, 0.0, 0.0),
         rotation: Vector4(1.0, 0.0, 0.0, 0.0)
       );
+      
       bool? didAddNodeToAnchor = await arObjectManager!.addNode(newNode, planeAnchor: newAnchor);
       if (didAddNodeToAnchor!) {
         nodes.add(newNode);
