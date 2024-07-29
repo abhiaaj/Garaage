@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../common/widgets/my_app_bar.dart';
-import '../widgets/test_ar.dart';
+import '../widgets/ar_body.dart';
 
 class ARIdentifyPage extends StatelessWidget {
   static String routeName = '/ar-identify';

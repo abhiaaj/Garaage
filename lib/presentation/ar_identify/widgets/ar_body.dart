@@ -12,6 +12,8 @@ import 'package:ar_flutter_plugin_flutterflow/datatypes/hittest_result_types.dar
 import 'package:ar_flutter_plugin_flutterflow/models/ar_node.dart';
 import 'package:ar_flutter_plugin_flutterflow/models/ar_hittest_result.dart';
 
+import 'ar_identify_info.dart';
+
 class MyARWidget extends StatefulWidget {
   const MyARWidget({super.key});
 
@@ -41,18 +43,10 @@ class _MyARWidgetState extends State<MyARWidget> {
           onARViewCreated: _onARViewCreated,
           planeDetectionConfig: PlaneDetectionConfig.horizontalAndVertical,
         ),
-        Align(
+        const Align(
           alignment: FractionalOffset.bottomCenter,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(
-                onPressed: _onRemoveEverything,
-                child: const Text("Remove Everything")
-              ),
-            ]
-          ),
-        )
+          child: ARIdentifyInfo(),
+        ),
       ]
     );
   }
