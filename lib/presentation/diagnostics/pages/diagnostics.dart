@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:garaage/presentation/chatbot/pages/chatbot.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../common/widgets/my_app_bar.dart';
@@ -76,6 +77,7 @@ class DiagnosticsPage extends StatefulWidget {
       ],
     },
   ];
+  // static final errorCodes = [];
 
   @override
   State<DiagnosticsPage> createState() => _DiagnosticsPageState();
@@ -87,7 +89,9 @@ class _DiagnosticsPageState extends State<DiagnosticsPage> {
   @override
   void initState() {
     super.initState();
-    selectedError = DiagnosticsPage.errorCodes[0];
+    selectedError = DiagnosticsPage.errorCodes.isEmpty
+        ? {}
+        : DiagnosticsPage.errorCodes.first;
   }
 
   void _updateSelectedError(Map<String, Object> error) {
@@ -112,14 +116,54 @@ class _DiagnosticsPageState extends State<DiagnosticsPage> {
             ? Center(
                 child: Column(
                   children: [
-                    const LastUpdated(),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(),
+                        LastUpdated(),
+                      ],
+                    ),
                     const SizedBox(height: 20),
-                    Text(
-                      'No error codes found.',
-                      style: AppText.bodyText.copyWith(
-                        color: AppColors.bodyText,
+                    Container(
+                      padding: const EdgeInsets.all(40),
+                      margin: const EdgeInsets.only(top: 80, bottom: 40),
+                      decoration: const BoxDecoration(
+                        color: AppColors.surface,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      child: SvgPicture.asset(
+                        AppIcons.broken['shield-tick']!,
+                        width: 40,
+                        colorFilter: const ColorFilter.mode(
+                          AppColors.primary,
+                          BlendMode.srcIn,
+                        ),
                       ),
                     ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Nothing Here',
+                            style: AppText.headH1.copyWith(
+                              color: AppColors.headingText,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            'This is where you\'ll find details of any error codes present in your vehicle.',
+                            style: AppText.bodyText.copyWith(
+                              color: AppColors.bodyText,
+                              fontSize: 12,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               )
@@ -128,7 +172,8 @@ class _DiagnosticsPageState extends State<DiagnosticsPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ErrorCodeDropdown(
-                      errorCodes: DiagnosticsPage.errorCodes,
+                      errorCodes: DiagnosticsPage.errorCodes
+                          as List<Map<String, Object>>,
                       selectedError: selectedError,
                       onChanged: _updateSelectedError,
                     ),
@@ -138,7 +183,85 @@ class _DiagnosticsPageState extends State<DiagnosticsPage> {
                 ),
                 const SizedBox(height: 10),
                 ErrorCodePanel(error: Error.fromMap(selectedError)),
+                const SizedBox(height: 20),
+                const Chatbot(),
               ]),
+      ),
+    );
+  }
+}
+
+class Chatbot extends StatelessWidget {
+  const Chatbot({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 10,
+      ),
+      decoration: const BoxDecoration(
+        color: AppColors.surface,
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SvgPicture.asset(
+            AppIcons.broken['chatbot']!,
+            width: 40,
+            colorFilter: const ColorFilter.mode(
+              AppColors.primary,
+              BlendMode.srcIn,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            'Confused?',
+            style: AppText.headH2.copyWith(
+              color: AppColors.headingText,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            'If you need help diagnosing an error code, you can chat with our virtual assistant for assistance.',
+            style: AppText.bodyText.copyWith(
+              color: AppColors.bodyText,
+              fontSize: 12,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(ChatbotPage.routeName);
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 40,
+                    vertical: 15,
+                  ),
+                  backgroundColor: AppColors.lightGrayLight,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: const Text(
+                  'Ask Mika AI',
+                  style: TextStyle(
+                    color: AppColors.darkGrayDark,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
