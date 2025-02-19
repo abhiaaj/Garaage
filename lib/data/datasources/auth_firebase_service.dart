@@ -15,7 +15,7 @@ abstract class AuthFirebaseService {
 
   Future<Either> register(CreateUserReq createUserReq);
 
-  Future<Either> signInWithGoogle();
+   signInWithGoogle();
 
   Future<Either> signOut();
 
@@ -91,15 +91,15 @@ class AuthFirebaseServiceImpl implements AuthFirebaseService {
   }
 
   @override
-  Future<Either> signInWithGoogle() async {
+   signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       if (googleUser == null) {
-        throw FirebaseAuthException(code: 'google-sign-in-failed');
+        // throw FirebaseAuthException(code: 'google-sign-in-failed');
       }
 
       final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
+          await googleUser!.authentication;
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
@@ -121,7 +121,7 @@ class AuthFirebaseServiceImpl implements AuthFirebaseService {
         });
       }
 
-      return const Right('Signed in with Google successfully');
+      // return const Right('Signed in with Google successfully');
     } on FirebaseAuthException catch (e) {
       String type = 'error';
       String message = '';
@@ -132,9 +132,10 @@ class AuthFirebaseServiceImpl implements AuthFirebaseService {
         message = 'Google sign in was cancelled.';
       }
 
-      return Left(ServerFailure(type, message));
+      // return Left<String,String>("An unexpected error occurred.");
     } catch (e) {
-      return Left(ServerFailure("error", "An unexpected error occurred."));
+      print(e.toString());
+      // return Left<String,String>("An unexpected error occurred.");
     }
   }
 

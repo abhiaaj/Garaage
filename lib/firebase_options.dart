@@ -59,11 +59,11 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBI1CacwsUhv1V8mdEQ1KmnXwByRAJWP64',
-    appId: '1:916224851549:ios:b3f6fa4d5138c75e2d17b4',
-    messagingSenderId: '916224851549',
-    projectId: 'garaage-14d0c',
-    storageBucket: 'garaage-14d0c.appspot.com',
+    apiKey: 'AIzaSyDBWPB1HvKKiIsrjWpVWOAbfAq4H6XmYQQ',
+    appId: '1:162895632698:ios:91ce9dcaab96a6a604d803',
+    messagingSenderId: '162895632698',
+    projectId: 'garaage-79785',
+    storageBucket: 'garaage-79785.firebasestorage.app',
     iosBundleId: 'com.example.garaage',
   );
 

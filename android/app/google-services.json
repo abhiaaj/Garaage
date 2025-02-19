@@ -1,67 +1,26 @@
 {
   "project_info": {
-    "project_number": "916224851549",
-    "project_id": "garaage-14d0c",
-    "storage_bucket": "garaage-14d0c.appspot.com"
+    "project_number": "162895632698",
+    "project_id": "garaage-79785",
+    "storage_bucket": "garaage-79785.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:916224851549:android:d2f72319ce720c632d17b4",
+        "mobilesdk_app_id": "1:162895632698:android:19f1dd5d7048891004d803",
         "android_client_info": {
           "package_name": "com.example.garaage"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "916224851549-8im45jc89g73arm2qiiodo2o1qpoh6kj.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.garaage",
-            "certificate_hash": "fd02e8466ae5852d85eaa44b11ab9b5c291de489"
-          }
-        },
-        {
-          "client_id": "916224851549-jg4u6oo4h6e1n36nddq8kl4p6nfv97ot.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.garaage",
-            "certificate_hash": "fbb0dc090848d93f45da0e209ad13b3312969bd3"
-          }
-        },
-        {
-          "client_id": "916224851549-vd22gkkasqbk959bb4m6prp0h1o6msff.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.garaage",
-            "certificate_hash": "6a8d82a3ff7f794be1e9ed8cf16f52637618b705"
-          }
-        },
-        {
-          "client_id": "916224851549-cogbif9kstmp9bd64euloogaa1ptempe.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCJdcuhekojE4Ejg0MnV0olpYEENh59iiA"
+          "current_key": "AIzaSyDPBZHk-IwLBQ6KpLiTvjoDjMsLfBqJhXc"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "916224851549-cogbif9kstmp9bd64euloogaa1ptempe.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "916224851549-0socd6p3a78sqf49dn1011rvjj82jb0b.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.test"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
